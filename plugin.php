@@ -4,7 +4,7 @@
  * Plugin Name: Nofollow Pretty Links
  * Plugin URI:  https://github.com/log1x/nofollow-pretty-links
  * Description: Add `rel="nofollow"` and `target="_blank"` to URL's created by Pretty Links
- * Version:     1.0.1
+ * Version:     1.0.2
  * Author:      Brandon Nifong
  * Author URI:  https://github.com/log1x
  * Licence:     MIT

@@ -14,78 +14,24 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => 'e9aa61010aabcf73f2db87e2bea62c134ad577b3',
     'name' => 'log1x/nofollow-pretty-links',
   ),
   'versions' => 
   array (
-    'illuminate/collections' => 
-    array (
-      'pretty_version' => 'v8.13.0',
-      'version' => '8.13.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'e61e796ff98e19eac5e6735ea6abfa66f4a2f6db',
-    ),
-    'illuminate/contracts' => 
-    array (
-      'pretty_version' => 'v8.13.0',
-      'version' => '8.13.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c23428149639d5257916ad10d390cdbeffe4d504',
-    ),
-    'illuminate/macroable' => 
-    array (
-      'pretty_version' => 'v8.13.0',
-      'version' => '8.13.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '300aa13c086f25116b5f3cde3ca54ff5c822fb05',
-    ),
     'log1x/nofollow-pretty-links' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
-    ),
-    'psr/container' => 
-    array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'b7ce3b176482dbbc1245ebf52b181af44c2cf55f',
-    ),
-    'psr/simple-cache' => 
-    array (
-      'pretty_version' => '1.0.1',
-      'version' => '1.0.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '408d5eafb83c57f6365a3ca330ff23aa4a5fa39b',
-    ),
-    'squizlabs/php_codesniffer' => 
-    array (
-      'pretty_version' => '3.5.8',
-      'version' => '3.5.8.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '9d583721a7157ee997f235f327de038e7ea6dac4',
+      'reference' => 'e9aa61010aabcf73f2db87e2bea62c134ad577b3',
     ),
     'symfony/dom-crawler' => 
     array (
@@ -122,6 +68,24 @@ private static $installed = array (
       array (
       ),
       'reference' => 'e70aa8b064c5b72d3df2abd5ab1e90464ad009de',
+    ),
+    'symfony/var-dumper' => 
+    array (
+      'pretty_version' => 'v5.1.8',
+      'version' => '5.1.8.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4e13f3fcefb1fcaaa5efb5403581406f4e840b9a',
+    ),
+    'tightenco/collect' => 
+    array (
+      'pretty_version' => 'v8.14.0',
+      'version' => '8.14.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8f79c602c872afd7c9371e193d6aa4ed13e97661',
     ),
   ),
 );
