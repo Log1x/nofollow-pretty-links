@@ -3,6 +3,7 @@
 namespace Log1x\Plugin\NofollowPrettyLinks;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Tightenco\Collect\Support\Collection;
 
 class NofollowPrettyLinks
 {
@@ -65,7 +66,7 @@ class NofollowPrettyLinks
 
                 $crawler = new Crawler($content);
 
-                $links = collect(
+                $links = $this->collect(
                     $crawler->filterXpath('//a[@href]')
                 )->filter(function ($value) {
                     return ! empty(
@@ -81,11 +82,11 @@ class NofollowPrettyLinks
                 }
 
                 $links->each(function ($value) {
-                    $rel = collect(
+                    $rel = $this->collect(
                         explode(' ', $value->getAttribute('rel'))
                     )->push('nofollow')->unique()->implode(' ');
 
-                    $target = collect(
+                    $target = $this->collect(
                         explode(' ', $value->getAttribute('target'))
                     )->push('_blank')->unique()->implode(' ');
 
@@ -98,5 +99,16 @@ class NofollowPrettyLinks
                     $content;
             });
         }
+    }
+
+    /**
+     * Create a new collection instance.
+     *
+     * @param  mixed $items
+     * @return \Tightenco\Collect\Support\Collection
+     */
+    protected function collect($items = [])
+    {
+        return new Collection($items);
     }
 }
