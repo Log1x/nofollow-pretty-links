@@ -1,43 +1,38 @@
 {
-    "name": "log1x/nofollow-pretty-links",
-    "type": "wordpress-plugin",
-    "license": "MIT",
-    "description": "Add `rel=\"nofollow\"` and `target=\"_blank\"` to URL's created by Pretty Links",
-    "authors": [
-        {
-            "name": "Brandon Nifong",
-            "email": "brandon@tendency.me"
-        }
-    ],
-    "keywords": [
-        "wordpress"
-    ],
-    "support": {
-        "issues": "https://github.com/log1x/nofollow-pretty-links/issues"
-    },
-    "autoload": {
-        "psr-4": {
-            "Log1x\\Plugin\\NofollowPrettyLinks\\": "src/"
-        }
-    },
-    "require": {
-        "php": ">=7.2.5",
-        "symfony/dom-crawler": "^5.1",
-        "tightenco/collect": "^8.14"
-    },
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^3.5"
-    },
-    "scripts": {
-        "lint": [
-            "phpcs --ignore=vendor --extensions=php --standard=PSR12 ."
-        ]
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "log1x/nofollow-pretty-links",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "description": "Add `rel=\"nofollow\"` and `target=\"_blank\"` to URL's created by Pretty Links",
+  "authors": [
+    {
+      "name": "Brandon Nifong",
+      "email": "brandon@tendency.me"
+    }
+  ],
+  "keywords": [
+    "wordpress"
+  ],
+  "support": {
+    "issues": "https://github.com/log1x/nofollow-pretty-links/issues"
+  },
+  "autoload": {
+    "psr-4": {
+      "Log1x\\Plugin\\NofollowPrettyLinks\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.0",
+    "symfony/dom-crawler": "^5.1",
+    "illuminate/collections": "^9.0|^10.0|^11.0"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.15"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

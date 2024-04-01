@@ -2,8 +2,8 @@
 
 namespace Log1x\Plugin\NofollowPrettyLinks;
 
+use Illuminate\Support\Collection;
 use Symfony\Component\DomCrawler\Crawler;
-use Tightenco\Collect\Support\Collection;
 
 class NofollowPrettyLinks
 {
@@ -31,8 +31,8 @@ class NofollowPrettyLinks
     /**
      * Initialize the plugin.
      *
-     * @param  string $path
-     * @param  string $uri
+     * @param  string  $path
+     * @param  string  $uri
      * @return void
      */
     public function __construct($path, $uri)
@@ -104,8 +104,8 @@ class NofollowPrettyLinks
     /**
      * Create a new collection instance.
      *
-     * @param  mixed $items
-     * @return \Tightenco\Collect\Support\Collection
+     * @param  mixed  $items
+     * @return \Illuminate\Support\Collection
      */
     protected function collect($items = [])
     {
