@@ -7,7 +7,7 @@ Simple plugin that filters the current post content/excerpt forcing URL's create
 
 ## Requirements
 
-- [PHP](https://secure.php.net/manual/en/install.php) >= 7.2.5
+- [PHP](https://secure.php.net/manual/en/install.php) >= 8.1
 - [Composer](https://getcomposer.org/download/)
 
 ## Installation
