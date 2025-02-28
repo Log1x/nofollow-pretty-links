@@ -2,25 +2,11 @@
 
 namespace Log1x\Plugin\NofollowPrettyLinks;
 
-use Illuminate\Support\Collection;
+use DOMElement;
 use Symfony\Component\DomCrawler\Crawler;
 
 class NofollowPrettyLinks
 {
-    /**
-     * The plugin directory path.
-     *
-     * @var string
-     */
-    protected $path;
-
-    /**
-     * The plugin directory URI.
-     *
-     * @var string
-     */
-    protected $uri;
-
     /**
      * The Pretty Link instance.
      *
@@ -30,33 +16,30 @@ class NofollowPrettyLinks
 
     /**
      * Initialize the plugin.
-     *
-     * @param  string  $path
-     * @param  string  $uri
-     * @return void
      */
-    public function __construct($path, $uri)
+    public function __construct(protected string $path, protected string $uri)
     {
-        $this->path = $path;
-        $this->uri = $uri;
+        //
+    }
 
+    /**
+     * Boot the plugin.
+     */
+    public function boot(): void
+    {
         if (! class_exists('\PrliLink')) {
             return;
         }
 
-        $this->prettyLink = new \PrliLink();
+        $this->prettyLink = new \PrliLink;
 
         $this->filterContent();
     }
 
     /**
-     * Ensure any URL's controlled by Pretty Links are set to
-     * `rel="nofollow"` and `target="_blank"` when displayed in the
-     * content or excerpt.
-     *
-     * @return void
+     * Add `nofollow` and `_blank` attributes to Pretty Links.
      */
-    public function filterContent()
+    public function filterContent(): void
     {
         foreach (['the_content', 'the_excerpt'] as $hook) {
             add_filter($hook, function ($content) {
@@ -66,49 +49,56 @@ class NofollowPrettyLinks
 
                 $crawler = new Crawler($content);
 
-                $links = $this->collect(
-                    $crawler->filterXpath('//a[@href]')
-                )->filter(function ($value) {
-                    return ! empty(
-                        $this->prettyLink->is_pretty_link(
-                            untrailingslashit($value->getAttribute('href')),
-                            false
-                        )
-                    );
-                });
+                $links = $crawler->filterXpath('//a[@href]');
 
-                if ($links->isEmpty()) {
+                if (! $links->count()) {
                     return $content;
                 }
 
-                $links->each(function ($value) {
-                    $rel = $this->collect(
-                        explode(' ', $value->getAttribute('rel'))
-                    )->push('nofollow')->unique()->implode(' ');
+                $modified = false;
 
-                    $target = $this->collect(
-                        explode(' ', $value->getAttribute('target'))
-                    )->push('_blank')->unique()->implode(' ');
+                foreach ($links as $link) {
+                    $href = untrailingslashit($link->getAttribute('href'));
 
-                    $value->setAttribute('rel', trim($rel));
-                    $value->setAttribute('target', trim($target));
-                });
+                    if (empty($this->prettyLink->is_pretty_link($href, false))) {
+                        continue;
+                    }
 
-                return $crawler->count() ?
-                    $crawler->outerHtml() :
-                    $content;
+                    $modified = true;
+
+                    $this->addAttributes($link);
+                }
+
+                return $modified
+                    ? $crawler->outerHtml()
+                    : $content;
             });
         }
     }
 
     /**
-     * Create a new collection instance.
-     *
-     * @param  mixed  $items
-     * @return \Illuminate\Support\Collection
+     * Add nofollow and _blank attributes to a link.
      */
-    protected function collect($items = [])
+    protected function addAttributes(DOMElement $link): void
     {
-        return new Collection($items);
+        $rel = $link->getAttribute('rel');
+
+        $rels = $rel
+            ? array_filter(explode(' ', $rel))
+            : [];
+
+        $rels = array_merge($rels, ['nofollow', 'noopener']);
+
+        $link->setAttribute('rel', implode(' ', array_unique($rels)));
+
+        $target = $link->getAttribute('target');
+
+        $targets = $target
+            ? array_filter(explode(' ', $target))
+            : [];
+
+        $targets[] = '_blank';
+
+        $link->setAttribute('target', implode(' ', array_unique($targets)));
     }
 }

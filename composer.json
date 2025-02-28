@@ -21,12 +21,11 @@
     }
   },
   "require": {
-    "php": "^8.1",
-    "symfony/dom-crawler": "^5.1",
-    "illuminate/collections": "^9.0|^10.0|^11.0"
+    "php": ">=8.2",
+    "symfony/dom-crawler": "^7.2"
   },
   "require-dev": {
-    "laravel/pint": "^1.1"
+    "laravel/pint": "^1.21"
   },
   "config": {
     "optimize-autoloader": true,

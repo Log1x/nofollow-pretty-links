@@ -4,7 +4,7 @@
  * Plugin Name: Nofollow Pretty Links
  * Plugin URI:  https://github.com/log1x/nofollow-pretty-links
  * Description: Add `rel="nofollow"` and `target="_blank"` to URL's created by Pretty Links
- * Version:     1.0.4
+ * Version:     1.0.5
  * Author:      Brandon Nifong
  * Author URI:  https://github.com/log1x
  * Licence:     MIT
@@ -16,18 +16,7 @@ if (file_exists($composer = __DIR__.'/vendor/autoload.php')) {
     require_once $composer;
 }
 
-add_action('init', new class
-{
-    /**
-     * Invoke the plugin.
-     *
-     * @return void
-     */
-    public function __invoke()
-    {
-        return new NofollowPrettyLinks(
-            plugin_dir_path(__FILE__),
-            plugin_dir_url(__FILE__)
-        );
-    }
-});
+add_action('init', fn () => (new NofollowPrettyLinks(
+    plugin_dir_path(__FILE__),
+    plugin_dir_url(__FILE__)
+))->boot());
