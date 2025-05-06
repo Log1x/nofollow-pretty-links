@@ -43,7 +43,7 @@ class NofollowPrettyLinks
     {
         foreach (['the_content', 'the_excerpt'] as $hook) {
             add_filter($hook, function ($content) {
-                if (is_admin() || empty(trim($content))) {
+                if (is_admin() || ! is_string($content) || empty(trim($content))) {
                     return $content;
                 }
 
@@ -69,9 +69,17 @@ class NofollowPrettyLinks
                     $this->addAttributes($link);
                 }
 
-                return $modified
-                    ? $crawler->outerHtml()
-                    : $content;
+                if (! $modified) {
+                    return $content;
+                }
+
+                $html = '';
+
+                foreach ($crawler->filterXPath('//body/*') as $node) {
+                    $html .= $node->ownerDocument->saveHTML($node);
+                }
+
+                return $html;
             });
         }
     }
